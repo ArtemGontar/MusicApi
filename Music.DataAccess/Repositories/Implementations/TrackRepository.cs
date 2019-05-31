@@ -6,6 +6,10 @@ namespace Music.DataAccess.Repositories.Implementations
 {
     public class TrackRepository : GenericRepository<Track>, ITrackRepository
     {
-        
+        public TrackRepository(MusicDbContext dbContext)
+            : base(dbContext)
+        {
+
+        }
     }
 }
