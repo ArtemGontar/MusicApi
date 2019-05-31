@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Music.DataAccess.Entities;
 using System.Collections.Generic;
-using System.Text;
-using Music.DataAccess.Entities;
 
 namespace BussinessLogic.Services.Interfaces
 {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BussinessLogic.Services.Interfaces;
+﻿using BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
-using Music.DataAccess.Repositories.Implementations;
 using Music.DataAccess.Repositories.Interfaces;
+using System.Collections.Generic;
 
 namespace BussinessLogic.Services.Implementations
 {

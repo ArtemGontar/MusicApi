@@ -1,9 +1,6 @@
-﻿using System;
-using Music.DataAccess.Entities;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
-using MongoDB.Driver.GridFS;
+using Music.DataAccess.Entities;
 
 namespace Music.DataAccess
 {
