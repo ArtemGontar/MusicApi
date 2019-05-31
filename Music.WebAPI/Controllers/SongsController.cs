@@ -29,7 +29,7 @@ namespace Music.WebAPI.Controllers
         }
 
         // GET api/songs/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Song>> Get(string id)
         {
             return Ok(_songService.Get(new ObjectId(id)));
@@ -47,7 +47,7 @@ namespace Music.WebAPI.Controllers
         }
 
         // PUT api/songs
-        [HttpPut("{id}")]
+        [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, [FromBody] Song song)
         {
         
