@@ -1,4 +1,4 @@
-﻿namespace BussinessLogic.Services.Interfaces
+﻿namespace Music.BussinessLogic.Services.Interfaces
 {
     public interface IService
     {

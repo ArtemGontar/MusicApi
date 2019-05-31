@@ -10,7 +10,7 @@ namespace Music.DataAccess
         public MusicDbContext()
         {
             MongoClient = new MongoClient("mongodb://localhost:27017");
-            MongoDatabase = MongoClient.GetDatabase("TrackDB");
+            MongoDatabase = MongoClient.GetDatabase("SongDB");
         }
 
         public IMongoClient MongoClient { get; set; }
@@ -21,6 +21,6 @@ namespace Music.DataAccess
             base.OnModelCreating(builder);
         }
 
-        public DbSet<Track> Tracks { get; set; }
+        public DbSet<Song> Songs { get; set; }
     }
 }

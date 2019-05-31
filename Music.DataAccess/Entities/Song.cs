@@ -5,7 +5,7 @@ using Music.DataAccess.Entities.Interfaces;
 
 namespace Music.DataAccess.Entities
 {
-    public class Track : IEntity
+    public class Song : IEntity
     {
 
         public int Id { get; set; }

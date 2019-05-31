@@ -6,7 +6,7 @@ using Music.DataAccess.Entities;
 
 namespace Music.DataAccess.Repositories.Interfaces
 {
-    public interface ITrackRepository : IGenericRepository<Track>
+    public interface ISongRepository : IGenericRepository<Song>
     {
     }
 }

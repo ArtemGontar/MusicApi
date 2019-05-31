@@ -17,15 +17,15 @@ namespace Music.DataAccess.Repositories.Impementations
         private readonly MusicDbContext _dbContext;
         private readonly IMongoCollection<TEntity> _collection;
 
-        public GenericRepository(MusicDbContext dbContext)
+        public GenericRepository(MusicDbContext dbContext, string collectionName)
         {
             _dbContext = dbContext;
-            _collection = _dbContext.MongoDatabase.GetCollection<TEntity>(nameof(TEntity));
+            _collection = _dbContext.MongoDatabase.GetCollection<TEntity>(collectionName);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _collection.Find(book => true).ToList();
+            return _collection.Find(entity => true).ToList();
         }
 
         public TEntity GetById(int id)
@@ -67,7 +67,7 @@ namespace Music.DataAccess.Repositories.Impementations
         //public async Task<TEntity> GetByIdAsync(int id)
         //{
         //    return await _dbContext.Set<TEntity>()
-        //        .AsNoTracking()
+        //        .AsNoSonging()
         //        .FirstOrDefaultAsync(e => e.Id == id);
         //}
 

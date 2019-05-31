@@ -4,10 +4,10 @@ using Music.DataAccess.Repositories.Interfaces;
 
 namespace Music.DataAccess.Repositories.Implementations
 {
-    public class TrackRepository : GenericRepository<Track>, ITrackRepository
+    public class SongRepository : GenericRepository<Song>, ISongRepository
     {
-        public TrackRepository(MusicDbContext dbContext)
-            : base(dbContext)
+        public SongRepository(MusicDbContext dbContext)
+            : base(dbContext, nameof(Song))
         {
 
         }

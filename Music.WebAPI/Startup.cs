@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BussinessLogic.Services.Implementations;
-using BussinessLogic.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Music.BussinessLogic.Services.Implementations;
+using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess;
 using Music.DataAccess.Repositories.Implementations;
 using Music.DataAccess.Repositories.Interfaces;
@@ -32,8 +33,10 @@ namespace Music.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<MusicDbContext>();
-            services.AddScoped<ITrackRepository, TrackRepository>();
-            services.AddScoped<ITrackService, TrackService>();
+            services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<ISongService, SongService>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IArtistService, ArtistService>();
 
             services.AddSwaggerGen(options =>
             {
