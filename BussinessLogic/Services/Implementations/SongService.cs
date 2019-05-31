@@ -1,6 +1,7 @@
 ﻿using Music.DataAccess.Entities;
 using Music.DataAccess.Repositories.Interfaces;
 using System.Collections.Generic;
+using MongoDB.Bson;
 using Music.BussinessLogic.Services.Interfaces;
 
 namespace BussinessLogic.Services.Implementations
@@ -19,7 +20,7 @@ namespace BussinessLogic.Services.Implementations
             return _songRepository.GetAll();
         }
 
-        public Song Get(int id)
+        public Song Get(ObjectId id)
         {
             return _songRepository.GetById(id);
         }
@@ -29,12 +30,12 @@ namespace BussinessLogic.Services.Implementations
             _songRepository.Create(song);
         }
 
-        public bool Update(int id, Song song)
+        public bool Update(ObjectId id, Song song)
         {
             return _songRepository.Update(id, song);
         }
 
-        public bool Delete(int id)
+        public bool Delete(ObjectId id)
         {
             return _songRepository.Delete(id);
         }

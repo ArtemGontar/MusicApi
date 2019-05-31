@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
 
@@ -47,15 +48,15 @@ namespace Music.WebAPI.Controllers
 
         // PUT api/songs
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Song song)
+        public async Task<IActionResult> Update(string id, [FromBody] Song song)
         {
         
-            if (id != song.Id)
+            if (new ObjectId(id) != song.Id)
             {
                 return BadRequest();
             }
         
-            _songService.Update(id, song);
+            _songService.Update(new ObjectId(id), song);
         
             //SaveChange
         

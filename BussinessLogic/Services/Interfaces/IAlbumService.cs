@@ -6,15 +6,15 @@ using Music.DataAccess.Entities;
 
 namespace Music.BussinessLogic.Services.Interfaces
 {
-    public interface IArtistService : IService
+    public interface IAlbumService : IService
     {
-        IEnumerable<Artist> GetAll();
+        IEnumerable<Album> GetAll();
 
-        Artist Get(ObjectId id);
+        Album Get(ObjectId id);
 
-        void Create(Artist artist);
+        void Create(Album album);
 
-        bool Update(ObjectId id, Artist artist);
+        bool Update(ObjectId id, Album album);
 
         bool Delete(ObjectId id);
     }

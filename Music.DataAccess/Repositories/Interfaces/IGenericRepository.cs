@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 using Music.DataAccess.Entities.Interfaces;
 
 namespace Music.DataAccess.Repositories.Interfaces
@@ -12,13 +13,13 @@ namespace Music.DataAccess.Repositories.Interfaces
     {
         IEnumerable<TEntity> GetAll();
 
-        TEntity GetById(int id);
+        TEntity GetById(ObjectId id);
 
         void Create(TEntity entity);
 
-        bool Update(int id, TEntity entity);
+        bool Update(ObjectId id, TEntity entity);
 
-        bool Delete(int id);
+        bool Delete(ObjectId id);
         
         //Task<IQueryable<TEntity>> GetAllAsync();
 

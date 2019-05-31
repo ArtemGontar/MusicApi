@@ -6,28 +6,23 @@ using Music.DataAccess.Entities.Interfaces;
 
 namespace Music.DataAccess.Entities
 {
-    public class Artist : IEntity
+    public class Group : IEntity
     {
-        public Artist()
+        public Group()
         {
-            Songs = new List<Song>();
-
+            Members = new List<Artist>();
             Albums = new List<Album>();
-            
+            Songs = new List<Song>();
         }
 
         public ObjectId Id { get; set; }
 
         public string Name { get; set; }
 
-        public string Surname { get; set; }
-
-        public string Fullname { get => Name + Surname; }
-
-        public ICollection<Song> Songs { get; set; }
+        public ICollection<Artist> Members { get; set; }
 
         public ICollection<Album> Albums { get; set; }
 
-        public Group Group { get; set; }
+        public ICollection<Song> Songs { get; set; }
     }
 }

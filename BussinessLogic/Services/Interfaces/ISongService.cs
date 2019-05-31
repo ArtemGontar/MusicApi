@@ -1,5 +1,6 @@
 ﻿using Music.DataAccess.Entities;
 using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace Music.BussinessLogic.Services.Interfaces
 {
@@ -7,12 +8,12 @@ namespace Music.BussinessLogic.Services.Interfaces
     {
         IEnumerable<Song> GetAll();
 
-        Song Get(int id);
+        Song Get(ObjectId id);
 
         void Create(Song song);
 
-        bool Update(int id, Song song);
+        bool Update(ObjectId id, Song song);
 
-        bool Delete(int id);
+        bool Delete(ObjectId id);
     }
 }

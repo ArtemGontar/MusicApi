@@ -37,6 +37,11 @@ namespace Music.WebAPI
             services.AddScoped<ISongService, SongService>();
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<IArtistService, ArtistService>();
+            services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddScoped<IAlbumService, AlbumService>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IGroupService, GroupService>();
+
 
             services.AddSwaggerGen(options =>
             {

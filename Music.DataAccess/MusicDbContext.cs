@@ -20,7 +20,5 @@ namespace Music.DataAccess
         {
             base.OnModelCreating(builder);
         }
-
-        public DbSet<Song> Songs { get; set; }
     }
 }

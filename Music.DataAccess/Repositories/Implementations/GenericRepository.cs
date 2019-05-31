@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Music.DataAccess.Entities;
 using Music.DataAccess.Entities.Interfaces;
@@ -28,7 +29,7 @@ namespace Music.DataAccess.Repositories.Impementations
             return _collection.Find(entity => true).ToList();
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(ObjectId id)
         {
             return _collection.Find(book => book.Id == id).FirstOrDefault();
         }
@@ -38,7 +39,7 @@ namespace Music.DataAccess.Repositories.Impementations
             _collection.InsertOne(entity);
         }
 
-        public bool Update(int id, TEntity entity)
+        public bool Update(ObjectId id, TEntity entity)
         {
             ReplaceOneResult updateResult =
                 _collection
@@ -49,7 +50,7 @@ namespace Music.DataAccess.Repositories.Impementations
                    && updateResult.ModifiedCount > 0;
         }
 
-        public bool Delete(int id)
+        public bool Delete(ObjectId id)
         {
             FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq(m => m.Id, id);
             DeleteResult deleteResult = _collection
