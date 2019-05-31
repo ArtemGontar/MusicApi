@@ -27,9 +27,9 @@ namespace Music.WebAPI.Controllers
 
         // GET api/albums/5
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Album>> Get(int id)
+        public async Task<ActionResult<Album>> Get(string id)
         {
-            return Ok(_albumService.Get(id));
+            return Ok(_albumService.Get(new ObjectId(id)));
         }
 
         // POST api/albums
@@ -62,7 +62,7 @@ namespace Music.WebAPI.Controllers
 
         // DELETE api/albums
         [HttpDelete]
-        public async Task<IActionResult> Detete(int id)
+        public async Task<IActionResult> Detete(ObjectId id)
         {
             var album = _albumService.Get(id);
 

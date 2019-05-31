@@ -30,9 +30,9 @@ namespace Music.WebAPI.Controllers
 
         // GET api/groups/5
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Group>> Get(int id)
+        public async Task<ActionResult<Group>> Get(string id)
         {
-            return Ok(_groupService.Get(id));
+            return Ok(_groupService.Get(new ObjectId(id)));
         }
 
         // POST api/groups
@@ -64,15 +64,15 @@ namespace Music.WebAPI.Controllers
 
         // DELETE api/group
         [HttpDelete]
-        public async Task<IActionResult> Detete(int id)
+        public async Task<IActionResult> Detete(string id)
         {
-            var group = _groupService.Get(id);
+            var group = _groupService.Get(new ObjectId(id));
 
             if (group == null)
             {
                 return NotFound();
             }
-            _groupService.Delete(id);
+            _groupService.Delete(new ObjectId(id));
             return NoContent();
         }
     }

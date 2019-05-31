@@ -30,9 +30,9 @@ namespace Music.WebAPI.Controllers
 
         // GET api/songs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Song>> Get(int id)
+        public async Task<ActionResult<Song>> Get(string id)
         {
-            return Ok(_songService.Get(id));
+            return Ok(_songService.Get(new ObjectId(id)));
         }
 
         // POST api/songs
@@ -65,15 +65,15 @@ namespace Music.WebAPI.Controllers
         
         // DELETE api/songs
         [HttpDelete]
-        public async Task<IActionResult> Detete(int id)
+        public async Task<IActionResult> Detete(string id)
         {
-            var song = _songService.Get(id);
+            var song = _songService.Get(new ObjectId(id));
         
             if (song == null)
             {
                 return NotFound();
             }
-            _songService.Delete(id);
+            _songService.Delete(new ObjectId(id));
             return NoContent();
         }
     }
