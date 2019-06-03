@@ -3,10 +3,12 @@ using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using MongoDB.Bson;
 
 namespace Music.WebAPI.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AlbumsController : ControllerBase

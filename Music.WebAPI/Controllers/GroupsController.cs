@@ -10,6 +10,7 @@ using Music.DataAccess.Entities;
 
 namespace Music.WebAPI.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GroupsController : ControllerBase

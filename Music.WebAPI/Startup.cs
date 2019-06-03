@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using BussinessLogic.Services.Implementations;
+﻿using BussinessLogic.Services.Implementations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Music.BussinessLogic.Services.Implementations;
 using Music.BussinessLogic.Services.Interfaces;
@@ -23,6 +14,11 @@ using Music.DataAccess.Repositories.Implementations;
 using Music.DataAccess.Repositories.Interfaces;
 using Music.WebAPI.Infrastructure;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Music.WebAPI
 {
@@ -47,6 +43,8 @@ namespace Music.WebAPI
             services.AddScoped<IAlbumService, AlbumService>();
             services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<IGroupService, GroupService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
 
 
             services.AddSwaggerGen(options =>
@@ -72,9 +70,9 @@ namespace Music.WebAPI
                 options.AddSecurityRequirement(security);
 
                 // Set the comments path for the Swagger JSON and UI.
-                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                //options.IncludeXmlComments(xmlPath);
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

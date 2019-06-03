@@ -7,7 +7,7 @@ using Music.DataAccess.Entities;
 
 namespace Music.BussinessLogic.Services.Interfaces
 {
-    public interface IAuthService : IService
+    public interface IUserService : IService
     {
         IEnumerable<User> GetAll();
 

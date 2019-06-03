@@ -6,7 +6,7 @@ using Music.DataAccess.Entities;
 
 namespace Music.DataAccess.Repositories.Interfaces
 {
-    public interface IAuthRepository : IGenericRepository<User>
+    public interface IUserRepository : IGenericRepository<User>
     {
         Task<User> GetUser(string login, string password);
     }

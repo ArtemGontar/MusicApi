@@ -10,23 +10,17 @@ using Music.DataAccess.Repositories.Interfaces;
 
 namespace Music.DataAccess.Repositories.Implementations
 {
-    public class AuthRepository : GenericRepository<User>, IAuthRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public AuthRepository(IOptions<Settings> settings)
+        public UserRepository(IOptions<Settings> settings)
             : base(settings, nameof(User))
         {
         }
-        //public AuthRepository(IOptions<Settings> settings)
-        //{
-        //    _context = new AuthContext(settings);
-        //}
         public async Task<User> GetUser(string login, string password)
         {
-            var builder = Builders<User>.Filter;
-            var filter = builder.Eq("Login", login) & builder.Eq("Password", password);
-
-            return await _collection.Find(filter)
+            return await _collection.Find(x => x.Login == login && x.Password == password)
                 .FirstOrDefaultAsync();
         }
+        
     }
 }

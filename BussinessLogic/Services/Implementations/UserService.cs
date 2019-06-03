@@ -9,11 +9,11 @@ using Music.DataAccess.Repositories.Interfaces;
 
 namespace Music.BussinessLogic.Services.Implementations
 {
-    public class AuthService : IAuthService
+    public class UserService : IUserService
     {
-        private readonly IAuthRepository _authRepository;
+        private readonly IUserRepository _authRepository;
 
-        public AuthService(IAuthRepository authRepository)
+        public UserService(IUserRepository authRepository)
         {
             this._authRepository = authRepository;
         }
