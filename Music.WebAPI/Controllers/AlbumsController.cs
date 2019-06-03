@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MongoDB.Bson;
 
 namespace Music.WebAPI.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AlbumsController : ControllerBase
@@ -22,21 +23,21 @@ namespace Music.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Album>>> GetAll()
         {
-            return Ok(_albumService.GetAll());
+            return Ok(await _albumService.GetAllAsync());
         }
 
         // GET api/albums/5
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Album>> Get(string id)
         {
-            return Ok(_albumService.Get(new ObjectId(id)));
+            return Ok(await _albumService.GetAsync(new ObjectId(id)));
         }
 
         // POST api/albums
         [HttpPost]
         public async Task<ActionResult<Album>> Create([FromBody]Album album)
         {
-            _albumService.Create(album);
+            await _albumService.CreateAsync(album);
 
             //SaveChange
 
@@ -48,15 +49,13 @@ namespace Music.WebAPI.Controllers
         public async Task<IActionResult> Update(string id, [FromBody] Album album)
         {
 
-            if (new ObjectId(id) != album.Id)
-            {
-                return BadRequest();
-            }
+            //if (new ObjectId(id) != album.Id)
+            //{
+            //    return BadRequest();
+            //}
 
-            _albumService.Update(new ObjectId(id), album);
-
-            //SaveChange
-
+            await _albumService.UpdateAsync(new ObjectId(id), album);
+            
             return NoContent();
         }
 
@@ -64,13 +63,13 @@ namespace Music.WebAPI.Controllers
         [HttpDelete]
         public async Task<IActionResult> Detete(ObjectId id)
         {
-            var album = _albumService.Get(id);
+            var album = await _albumService.GetAsync(id);
 
             if (album == null)
             {
                 return NotFound();
             }
-            _albumService.Delete(id);
+            await _albumService.DeleteAsync(id);
             return NoContent();
         }
     }

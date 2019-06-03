@@ -1,6 +1,7 @@
 ﻿using Music.DataAccess.Entities;
 using Music.DataAccess.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MongoDB.Bson;
 using Music.BussinessLogic.Services.Interfaces;
 
@@ -14,6 +15,8 @@ namespace BussinessLogic.Services.Implementations
         {
             this._songRepository = songRepository;
         }
+
+        #region SyncCRUD
 
         public IEnumerable<Song> GetAll()
         {
@@ -39,5 +42,36 @@ namespace BussinessLogic.Services.Implementations
         {
             return _songRepository.Delete(id);
         }
+
+        #endregion
+        
+        #region AsyncCRUD
+
+        public async Task<IEnumerable<Song>> GetAllAsync()
+        {
+            return await _songRepository.GetAllAsync();
+        }
+
+        public async Task<Song> GetAsync(ObjectId id)
+        {
+            return await _songRepository.GetByIdAsync(id);
+        }
+
+        public async Task CreateAsync(Song song)
+        {
+            await _songRepository.CreateAsync(song);
+        }
+
+        public async Task<bool> UpdateAsync(ObjectId id, Song song)
+        {
+            return await _songRepository.UpdateAsync(id, song);
+        }
+
+        public async Task<bool> DeleteAsync(ObjectId id)
+        {
+            return await _songRepository.DeleteAsync(id);
+        }
+
+        #endregion
     }
 }

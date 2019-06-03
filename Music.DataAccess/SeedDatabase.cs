@@ -10,7 +10,7 @@ namespace Music.DataAccess
         public static async void Initialize(IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetRequiredService<MusicDbContext>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             context.Database.EnsureCreated();
 
             //if (!context.Users.Any())

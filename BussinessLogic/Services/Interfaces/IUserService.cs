@@ -7,7 +7,8 @@ using Music.DataAccess.Entities;
 
 namespace Music.BussinessLogic.Services.Interfaces
 {
-    public interface IArtistService : IService<Artist>
+    public interface IUserService : IService<User>
     {
+        Task<User> GetUser(string login, string password);
     }
 }

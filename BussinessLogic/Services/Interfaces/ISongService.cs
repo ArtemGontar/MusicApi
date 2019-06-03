@@ -1,19 +1,11 @@
 ﻿using Music.DataAccess.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MongoDB.Bson;
 
 namespace Music.BussinessLogic.Services.Interfaces
 {
-    public interface ISongService : IService
+    public interface ISongService : IService<Song>
     {
-        IEnumerable<Song> GetAll();
-
-        Song Get(ObjectId id);
-
-        void Create(Song song);
-
-        bool Update(ObjectId id, Song song);
-
-        bool Delete(ObjectId id);
     }
 }

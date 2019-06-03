@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Music.WebAPI.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GroupsController : ControllerBase
@@ -25,24 +23,22 @@ namespace Music.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Group>>> GetAll()
         {
-            return Ok(_groupService.GetAll());
+            return Ok(await _groupService.GetAllAsync());
         }
 
         // GET api/groups/5
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Group>> Get(string id)
         {
-            return Ok(_groupService.Get(new ObjectId(id)));
+            return Ok(await _groupService.GetAsync(new ObjectId(id)));
         }
 
         // POST api/groups
         [HttpPost]
         public async Task<ActionResult<Group>> Create([FromBody] Group group)
         {
-            _groupService.Create(group);
-
-            //SaveChange
-
+            await _groupService.CreateAsync(group);
+            
             return CreatedAtAction(nameof(Get), new { id = group.Id }, group);
         }
 
@@ -50,15 +46,13 @@ namespace Music.WebAPI.Controllers
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, [FromBody] Group group)
         {
-            if (new ObjectId(id) != group.Id)
-            {
-                return BadRequest();
-            }
+            //if (new ObjectId(id) != group.Id)
+            //{
+            //    return BadRequest();
+            //}
 
-            _groupService.Update(new ObjectId(id), group);
-
-            //SaveChange
-
+            await _groupService.UpdateAsync(new ObjectId(id), group);
+            
             return NoContent();
         }
 
@@ -66,13 +60,13 @@ namespace Music.WebAPI.Controllers
         [HttpDelete]
         public async Task<IActionResult> Detete(string id)
         {
-            var group = _groupService.Get(new ObjectId(id));
+            var group = await _groupService.GetAsync(new ObjectId(id));
 
             if (group == null)
             {
                 return NotFound();
             }
-            _groupService.Delete(new ObjectId(id));
+            await _groupService.DeleteAsync(new ObjectId(id));
             return NoContent();
         }
     }
