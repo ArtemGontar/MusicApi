@@ -9,8 +9,9 @@ namespace Music.DataAccess.Entities
 {
     public class Song : IEntity
     {
-
-        public ObjectId Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement("Name")]
         public string Name { get; set; }
@@ -18,13 +19,16 @@ namespace Music.DataAccess.Entities
         [BsonElement("Description")]
         public string Description { get; set; }
 
-        [BsonElement("BookName")]
-        public Artist Artist { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ArtistId { get; set; }
 
-        [BsonElement("BookName")]
-        public Group Group { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string GroupId { get; set; }
 
-        [BsonElement("BookName")]
-        public Album Album { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string AlbumId { get; set; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime ReleaseDate { get; set; }
     }
 }

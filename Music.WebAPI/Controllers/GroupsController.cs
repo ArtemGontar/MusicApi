@@ -50,10 +50,10 @@ namespace Music.WebAPI.Controllers
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, [FromBody] Group group)
         {
-            if (new ObjectId(id) != group.Id)
-            {
-                return BadRequest();
-            }
+            //if (new ObjectId(id) != group.Id)
+            //{
+            //    return BadRequest();
+            //}
 
             _groupService.Update(new ObjectId(id), group);
 

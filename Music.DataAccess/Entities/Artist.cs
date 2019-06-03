@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using Music.DataAccess.Entities.Interfaces;
 
 namespace Music.DataAccess.Entities
@@ -10,24 +11,31 @@ namespace Music.DataAccess.Entities
     {
         public Artist()
         {
-            Songs = new List<Song>();
+            SongIds = new List<string>();
 
-            Albums = new List<Album>();
+            AlbumIds = new List<string>();
             
         }
 
-        public ObjectId Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
+        [BsonElement("Name")]
         public string Name { get; set; }
 
+        [BsonElement("Surname")]
         public string Surname { get; set; }
 
         public string Fullname { get => Name + Surname; }
 
-        public ICollection<Song> Songs { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public ICollection<string> SongIds { get; set; }
 
-        public ICollection<Album> Albums { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public ICollection<string> AlbumIds { get; set; }
 
-        public Group Group { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string GroupId { get; set; }
     }
 }

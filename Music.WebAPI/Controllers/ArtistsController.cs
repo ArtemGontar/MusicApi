@@ -53,10 +53,10 @@ namespace Music.WebAPI.Controllers
         public async Task<IActionResult> Update(string id, [FromBody] Artist artist)
         {
         
-            if (new ObjectId(id) != artist.Id)
-            {
-                return BadRequest();
-            }
+            //if (new ObjectId(id) != artist.Id)
+            //{
+            //    return BadRequest();
+            //}
         
             _artistService.Update(new ObjectId(id), artist);
         
