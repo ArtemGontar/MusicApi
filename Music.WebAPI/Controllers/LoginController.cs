@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
 using Music.WebAPI.Infrastructure;
+using Music.WebAPI.Models;
+using System.Threading.Tasks;
 
 namespace Music.WebAPI.Controllers
 {
@@ -15,7 +12,7 @@ namespace Music.WebAPI.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public LoginController(IUserService userService)
         {
@@ -25,7 +22,7 @@ namespace Music.WebAPI.Controllers
 
         // POST api/login
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login([FromBody]User user)
+        public async Task<IActionResult> Login([FromBody]LoginModel user)
         {
             var usr = await _userService.GetUser(user.Login, user.Password);
 
@@ -49,20 +46,27 @@ namespace Music.WebAPI.Controllers
 
         // POST api/register
         [HttpPost("[action]")]
-        public async Task<ActionResult<User>> Register([FromBody] User user)
+        public async Task<ActionResult<User>> Register([FromBody]RegisterModel user)
         {
-            _userService.Create(user);
+            User usr = new User
+            {
+                Login = user.Login,
+                Password = user.Password,
+                Name = user.Name
+            };
+
+            await _userService.CreateAsync(usr);
 
             //SaveChange
 
-            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(Get), new { id = usr.Id }, usr);
         }
 
         // GET api/songs/5
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Song>> Get(string id)
         {
-            return Ok(_userService.Get(new ObjectId(id)));
+            return Ok(await _userService.GetAsync(new ObjectId(id)));
         }
     }
 }

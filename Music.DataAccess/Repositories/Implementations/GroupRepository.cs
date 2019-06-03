@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Music.DataAccess.Entities;
 using Music.DataAccess.Repositories.Impementations;
 using Music.DataAccess.Repositories.Interfaces;

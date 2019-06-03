@@ -12,11 +12,13 @@ namespace Music.BussinessLogic.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IUserRepository _authRepository;
-
+        
         public UserService(IUserRepository authRepository)
         {
             this._authRepository = authRepository;
         }
+
+        #region SyncCRUD
 
         public IEnumerable<User> GetAll()
         {
@@ -43,6 +45,37 @@ namespace Music.BussinessLogic.Services.Implementations
             return _authRepository.Delete(id);
         }
 
+        #endregion
+
+        #region AsyncCRUD
+
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await _authRepository.GetAllAsync();
+        }
+
+        public async Task<User> GetAsync(ObjectId id)
+        {
+            return await _authRepository.GetByIdAsync(id);
+        }
+
+        public async Task CreateAsync(User user)
+        {
+            await _authRepository.CreateAsync(user);
+        }
+
+        public async Task<bool> UpdateAsync(ObjectId id, User user)
+        {
+            return await _authRepository.UpdateAsync(id, user);
+        }
+
+        public async Task<bool> DeleteAsync(ObjectId id)
+        {
+            return await _authRepository.DeleteAsync(id);
+        }
+
+        #endregion
+        
         public async Task<User> GetUser(string login, string password)
         {
             return await _authRepository.GetUser(login, password);

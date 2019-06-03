@@ -7,18 +7,8 @@ using Music.DataAccess.Entities;
 
 namespace Music.BussinessLogic.Services.Interfaces
 {
-    public interface IUserService : IService
+    public interface IUserService : IService<User>
     {
-        IEnumerable<User> GetAll();
-
-        User Get(ObjectId id);
-
-        void Create(User user);
-
-        bool Update(ObjectId id, User user);
-
-        bool Delete(ObjectId id);
-
         Task<User> GetUser(string login, string password);
     }
 }

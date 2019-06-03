@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Music.DataAccess.Entities;
 using System.Threading.Tasks;
-using Music.DataAccess.Entities;
 
 namespace Music.DataAccess.Repositories.Interfaces
 {

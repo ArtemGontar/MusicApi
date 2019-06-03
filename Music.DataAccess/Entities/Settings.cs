@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Music.DataAccess.Entities
+﻿namespace Music.DataAccess.Entities
 {
     public class Settings
     {

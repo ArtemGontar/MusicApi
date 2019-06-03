@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Music.DataAccess.Entities.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace Music.DataAccess.Entities
 {
@@ -21,10 +20,14 @@ namespace Music.DataAccess.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("Name")]
+
+        [BsonElement("nickname")]
+        public string Nickname { get; set; }
+        
+        [BsonElement("name")]
         public string Name { get; set; }
 
-        [BsonElement("Surname")]
+        [BsonElement("surname")]
         public string Surname { get; set; }
 
         public string Fullname { get => Name + Surname; }
@@ -37,5 +40,11 @@ namespace Music.DataAccess.Entities
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string GroupId { get; set; }
+
+        [BsonElement("mainGenre")]
+        public string MainGenre { get; set; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime BirthDay { get; set; }
     }
 }

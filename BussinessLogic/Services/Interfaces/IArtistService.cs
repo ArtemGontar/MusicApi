@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using MongoDB.Bson;
 using Music.DataAccess.Entities;
 
 namespace Music.BussinessLogic.Services.Interfaces
 {
-    public interface IArtistService : IService
+    public interface IArtistService : IService<Artist>
     {
-        IEnumerable<Artist> GetAll();
-
-        Artist Get(ObjectId id);
-
-        void Create(Artist artist);
-
-        bool Update(ObjectId id, Artist artist);
-
-        bool Delete(ObjectId id);
     }
 }
