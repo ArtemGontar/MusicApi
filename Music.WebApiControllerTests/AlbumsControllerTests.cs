@@ -3,19 +3,21 @@ using Moq;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
 using Music.WebAPI.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Music.WebApiTests
+namespace Music.WebApiControllerTests
 {
     [TestClass]
-    class AlbumsControllerTest
+    public class AlbumsControllerTests
     {
         readonly Mock<IAlbumService> _service;
         readonly AlbumsController _controller;
 
-        public AlbumsControllerTest()
+        public AlbumsControllerTests()
         {
             _service = new Mock<IAlbumService>();
             _service.Setup(x => x.GetAllAsync()).ReturnsAsync(GetTestAlbums());

@@ -1,21 +1,23 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
 using Music.WebAPI.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Music.WebApiTests
+namespace Music.WebApiControllerTests
 {
     [TestClass]
-    public class ArtistsControllerTest
+    public class ArtistsControllerTests
     {
         readonly Mock<IArtistService> _service;
         readonly ArtistsController _controller;
 
-        public ArtistsControllerTest()
+        public ArtistsControllerTests()
         {
             _service = new Mock<IArtistService>();
             _service.Setup(x => x.GetAllAsync()).ReturnsAsync(GetTestArtists());

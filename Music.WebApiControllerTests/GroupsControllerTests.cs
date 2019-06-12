@@ -3,19 +3,21 @@ using Moq;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
 using Music.WebAPI.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Music.WebApiTests
+namespace Music.WebApiControllerTests
 {
     [TestClass]
-    class GroupsControllerTest
+    public class GroupsControllerTests
     {
         readonly Mock<IGroupService> _service;
         readonly GroupsController _controller;
 
-        public GroupsControllerTest()
+        public GroupsControllerTests()
         {
             _service = new Mock<IGroupService>();
             _service.Setup(x => x.GetAllAsync()).ReturnsAsync(GetTestGroups());
