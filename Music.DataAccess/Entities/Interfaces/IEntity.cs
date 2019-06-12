@@ -7,6 +7,6 @@ namespace Music.DataAccess.Entities.Interfaces
 {
     public interface IEntity
     {
-        ObjectId Id { get; set; }
+        string Id { get; set; }
     }
 }

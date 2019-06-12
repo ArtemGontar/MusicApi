@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Music.WebAPI.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SongsController : ControllerBase
@@ -23,57 +21,53 @@ namespace Music.WebAPI.Controllers
 
         // GET api/songs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Song>>> GetAll()
+        public async Task<IEnumerable<Song>> GetAllAsync()
         {
-            return Ok(_songService.GetAll());
+            return await Task.FromResult(await _songService.GetAllAsync());
         }
 
         // GET api/songs/5
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Song>> Get(string id)
+        public async Task<Song> GetAsync(string id)
         {
-            return Ok(_songService.Get(new ObjectId(id)));
+            return await Task.FromResult(await _songService.GetAsync(new ObjectId(id)));
         }
 
         // POST api/songs
         [HttpPost]
-        public async Task<ActionResult<Song>> Create([FromBody] Song song)
+        public async Task<ActionResult<Song>> CreateAsync([FromBody] Song song)
         {
-            _songService.Create(song);
+            await _songService.CreateAsync(song);
 
-            //SaveChange
-
-            return CreatedAtAction(nameof(Get), new { id = song.Id }, song);
+            return CreatedAtAction(nameof(GetAsync), new { id = song.Id }, song);
         }
 
         // PUT api/songs
         [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> Update(string id, [FromBody] Song song)
+        public async Task<IActionResult> UpdateAsync(string id, [FromBody] Song song)
         {
         
-            if (new ObjectId(id) != song.Id)
-            {
-                return BadRequest();
-            }
+            //if (new ObjectId(id) != song.Id)
+            //{
+            //    return BadRequest();
+            //}
         
-            _songService.Update(new ObjectId(id), song);
-        
-            //SaveChange
+            await _songService.UpdateAsync(new ObjectId(id), song);
         
             return NoContent();
         }
         
         // DELETE api/songs
         [HttpDelete]
-        public async Task<IActionResult> Detete(string id)
+        public async Task<IActionResult> DeteteAsync(string id)
         {
-            var song = _songService.Get(new ObjectId(id));
+            var song = await _songService.GetAsync(new ObjectId(id));
         
             if (song == null)
             {
                 return NotFound();
             }
-            _songService.Delete(new ObjectId(id));
+            await _songService.DeleteAsync(new ObjectId(id));
             return NoContent();
         }
     }

@@ -1,10 +1,8 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using Music.DataAccess.Entities.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using MongoDB.Bson;
-using Music.DataAccess.Entities.Interfaces;
 
 namespace Music.DataAccess.Repositories.Interfaces
 {
@@ -21,14 +19,14 @@ namespace Music.DataAccess.Repositories.Interfaces
 
         bool Delete(ObjectId id);
         
-        //Task<IQueryable<TEntity>> GetAllAsync();
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
-        //Task<TEntity> GetByIdAsync(int id);
+        Task<TEntity> GetByIdAsync(ObjectId id);
 
-        //Task CreateAsync(TEntity entity);
+        Task CreateAsync(TEntity entity);
 
-        //Task UpdateAsync(int id, TEntity entity);
+        Task<bool> UpdateAsync(ObjectId id, TEntity entity);
 
-        //Task DeleteAsync(int id);
+        Task<bool> DeleteAsync(ObjectId id);
     }
 }

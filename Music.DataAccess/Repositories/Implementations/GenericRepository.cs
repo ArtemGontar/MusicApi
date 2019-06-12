@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Music.DataAccess.Entities;
@@ -15,13 +16,13 @@ namespace Music.DataAccess.Repositories.Impementations
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class, IEntity
     {
-        private readonly MusicDbContext _dbContext;
-        private readonly IMongoCollection<TEntity> _collection;
+        protected readonly IMongoCollection<TEntity> _collection;
 
-        public GenericRepository(MusicDbContext dbContext, string collectionName)
+        public GenericRepository(IOptions<Settings> settings, string collectionName)
         {
-            _dbContext = dbContext;
-            _collection = _dbContext.MongoDatabase.GetCollection<TEntity>(collectionName);
+            var client = new MongoClient(settings.Value.ConnectionString);
+            var database = client?.GetDatabase(settings.Value.Database);
+            _collection = database.GetCollection<TEntity>(collectionName);
         }
 
         public IEnumerable<TEntity> GetAll()
@@ -31,7 +32,7 @@ namespace Music.DataAccess.Repositories.Impementations
 
         public TEntity GetById(ObjectId id)
         {
-            return _collection.Find(book => book.Id == id).FirstOrDefault();
+            return _collection.Find(book => new ObjectId(book.Id) == id).FirstOrDefault();
         }
 
         public void Create(TEntity entity)
@@ -52,7 +53,7 @@ namespace Music.DataAccess.Repositories.Impementations
 
         public bool Delete(ObjectId id)
         {
-            FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq(m => m.Id, id);
+            FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq(m => new ObjectId(m.Id), id);
             DeleteResult deleteResult = _collection
                 .DeleteOne(filter);
             return deleteResult.IsAcknowledged
@@ -60,36 +61,39 @@ namespace Music.DataAccess.Repositories.Impementations
         }
 
 
-        //public Task<IQueryable<TEntity>> GetAllAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await _collection.Find(entity => true).ToListAsync();
+        }
 
-        //public async Task<TEntity> GetByIdAsync(int id)
-        //{
-        //    return await _dbContext.Set<TEntity>()
-        //        .AsNoSonging()
-        //        .FirstOrDefaultAsync(e => e.Id == id);
-        //}
+        public async Task<TEntity> GetByIdAsync(ObjectId id)
+        {
+            return await _collection.Find(book => new ObjectId(book.Id) == id).FirstOrDefaultAsync();
+        }
 
-        //public async Task CreateAsync(TEntity entity)
-        //{
-        //    await _dbContext.Set<TEntity>().AddAsync(entity);
-        //    await _dbContext.SaveChangesAsync();
-        //}
+        public async Task CreateAsync(TEntity entity)
+        {
+            await _collection.InsertOneAsync(entity);
+        }
 
-        //public async Task UpdateAsync(int id, TEntity entity)
-        //{
-        //    _dbContext.Set<TEntity>().Update(entity);
-        //    await _dbContext.SaveChangesAsync();
-        //}
+        public async Task<bool> UpdateAsync(ObjectId id, TEntity entity)
+        {
+            ReplaceOneResult updateResult = await 
+                _collection
+                    .ReplaceOneAsync(
+                        filter: g => g.Id == entity.Id,
+                        replacement: entity);
+            return updateResult.IsAcknowledged
+                   && updateResult.ModifiedCount > 0;
+        }
 
-        //public async Task DeleteAsync(int id)
-        //{
-        //    var entity = await GetByIdAsync(id);
-        //    _dbContext.Set<TEntity>().Remove(entity);
-        //    await _dbContext.SaveChangesAsync();
-        //}
+        public async Task<bool> DeleteAsync(ObjectId id)
+        {
+            DeleteResult deleteResult = await _collection
+                .DeleteOneAsync(x => new ObjectId(x.Id) == id);
+            return deleteResult.IsAcknowledged
+                   && deleteResult.DeletedCount > 0;
+        }
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
-using Music.DataAccess.Entities;
 
 namespace Music.DataAccess
 {

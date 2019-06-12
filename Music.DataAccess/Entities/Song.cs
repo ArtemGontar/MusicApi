@@ -1,30 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Music.DataAccess.Entities.Interfaces;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Music.DataAccess.Entities
 {
     public class Song : IEntity
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
-        public ObjectId Id { get; set; }
-
-        [BsonElement("Name")]
+        [Required]
+        [BsonElement("name")]
         public string Name { get; set; }
 
-        [BsonElement("Description")]
+        [BsonElement("description")]
         public string Description { get; set; }
+        
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ArtistId { get; set; }
 
-        [BsonElement("BookName")]
-        public Artist Artist { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string GroupId { get; set; }
 
-        [BsonElement("BookName")]
-        public Group Group { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string AlbumId { get; set; }
 
-        [BsonElement("BookName")]
-        public Album Album { get; set; }
+        public long AmoutListening { get; set; }
+
+        public long AmoutLikes { get; set; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime ReleaseDate { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using Music.DataAccess.Entities.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace Music.DataAccess.Entities
 {
@@ -10,24 +10,41 @@ namespace Music.DataAccess.Entities
     {
         public Artist()
         {
-            Songs = new List<Song>();
+            SongIds = new List<string>();
 
-            Albums = new List<Album>();
+            AlbumIds = new List<string>();
             
         }
 
-        public ObjectId Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
+
+        [BsonElement("nickname")]
+        public string Nickname { get; set; }
+        
+        [BsonElement("name")]
         public string Name { get; set; }
 
+        [BsonElement("surname")]
         public string Surname { get; set; }
 
         public string Fullname { get => Name + Surname; }
 
-        public ICollection<Song> Songs { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public ICollection<string> SongIds { get; set; }
 
-        public ICollection<Album> Albums { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public ICollection<string> AlbumIds { get; set; }
 
-        public Group Group { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string GroupId { get; set; }
+
+        [BsonElement("mainGenre")]
+        public string MainGenre { get; set; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime BirthDay { get; set; }
     }
 }
