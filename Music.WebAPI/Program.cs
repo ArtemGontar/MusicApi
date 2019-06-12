@@ -3,13 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Events;
 using Serilog.Formatting.Compact;
 using System.IO;
 
 namespace Music.WebAPI
 {
-    public class Program
+    public static class Program
     {
         //public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
         //    .SetBasePath(Directory.GetCurrentDirectory())
