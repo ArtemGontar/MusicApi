@@ -84,8 +84,6 @@ namespace Music.WebAPI
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
-            });
-
                 options.AddSecurityDefinition("Bearer", new Swashbuckle.AspNetCore.Swagger.ApiKeyScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
@@ -93,16 +91,6 @@ namespace Music.WebAPI
                     In = "header",
                     Type = "apiKey"
                 });
-                var security = new Dictionary<string, IEnumerable<string>>
-                {
-                    {"Bearer", new string[] { }},
-                };
-                options.AddSecurityRequirement(security);
-
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                options.IncludeXmlComments(xmlPath);
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
@@ -133,19 +121,19 @@ namespace Music.WebAPI
                     };
                 });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Member",
-                    policy => policy.RequireClaim("MembershipId"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Member",
+            //        policy => policy.RequireClaim("MembershipId"));
+            //});
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.Configure<Settings>(options =>
-            {
-                options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
-                options.Database = Configuration.GetSection("MongoConnection:Database").Value;
-            });
+            //services.Configure<Settings>(options =>
+            //{
+            //    options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
+            //    options.Database = Configuration.GetSection("MongoConnection:Database").Value;
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
