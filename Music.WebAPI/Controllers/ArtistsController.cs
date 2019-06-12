@@ -21,30 +21,30 @@ namespace Music.WebAPI.Controllers
 
         // GET api/artists
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Artist>>> GetAll()
+        public async Task<IEnumerable<Artist>> GetAllAsync()
         {
-            return Ok(await _artistService.GetAllAsync());
+            return await Task.FromResult(await _artistService.GetAllAsync());
         }
 
         // GET api/artists/5
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Artist>> Get(string id)
+        public async Task<Artist> GetAsync(string id)
         {
-            return Ok(await _artistService.GetAsync(new ObjectId(id)));
+            return await Task.FromResult(await _artistService.GetAsync(new ObjectId(id)));
         }
 
         // POST api/artists
         [HttpPost]
-        public async Task<ActionResult<Artist>> Create([FromBody]Artist artist)
+        public async Task<ActionResult<Artist>> CreateAsync([FromBody]Artist artist)
         {
             await _artistService.CreateAsync(artist);
             
-            return CreatedAtAction(nameof(Get), new { id = artist.Id }, artist);
+            return CreatedAtAction(nameof(GetAsync), new { id = artist.Id }, artist);
         }
 
         // PUT api/artists
         [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> Update(string id, [FromBody] Artist artist)
+        public async Task<IActionResult> UpdateAsync(string id, [FromBody] Artist artist)
         {
         
             //if (new ObjectId(id) != artist.Id)
@@ -59,7 +59,7 @@ namespace Music.WebAPI.Controllers
         
         // DELETE api/artists
         [HttpDelete]
-        public async Task<IActionResult> Detete(string id)
+        public async Task<IActionResult> DeteteAsync(string id)
         {
             var artist = await _artistService.GetAsync(new ObjectId(id));
         

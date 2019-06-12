@@ -21,30 +21,30 @@ namespace Music.WebAPI.Controllers
 
         // GET api/groups
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Group>>> GetAll()
+        public async Task<IEnumerable<Group>> GetAllAsync()
         {
-            return Ok(await _groupService.GetAllAsync());
+            return await Task.FromResult(await _groupService.GetAllAsync());
         }
 
         // GET api/groups/5
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Group>> Get(string id)
+        public async Task<Group> GetAsync(string id)
         {
-            return Ok(await _groupService.GetAsync(new ObjectId(id)));
+            return await Task.FromResult(await _groupService.GetAsync(new ObjectId(id)));
         }
 
         // POST api/groups
         [HttpPost]
-        public async Task<ActionResult<Group>> Create([FromBody] Group group)
+        public async Task<ActionResult<Group>> CreateAsync([FromBody] Group group)
         {
             await _groupService.CreateAsync(group);
             
-            return CreatedAtAction(nameof(Get), new { id = group.Id }, group);
+            return CreatedAtAction(nameof(GetAsync), new { id = group.Id }, group);
         }
 
         // PUT api/groups
         [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> Update(string id, [FromBody] Group group)
+        public async Task<IActionResult> UpdateAsync(string id, [FromBody] Group group)
         {
             //if (new ObjectId(id) != group.Id)
             //{
@@ -58,7 +58,7 @@ namespace Music.WebAPI.Controllers
 
         // DELETE api/group
         [HttpDelete]
-        public async Task<IActionResult> Detete(string id)
+        public async Task<IActionResult> DeteteAsync(string id)
         {
             var group = await _groupService.GetAsync(new ObjectId(id));
 

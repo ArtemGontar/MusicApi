@@ -64,9 +64,9 @@ namespace Music.WebAPI.Controllers
 
         // GET api/songs/5
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Song>> Get(string id)
+        public async Task<User> Get(string id)
         {
-            return Ok(await _userService.GetAsync(new ObjectId(id)));
+            return await Task.FromResult(await _userService.GetAsync(new ObjectId(id)));
         }
     }
 }
