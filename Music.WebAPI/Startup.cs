@@ -22,8 +22,15 @@ using System.Threading.Tasks;
 
 namespace Music.WebAPI
 {
+    /// <summary>
+    /// Startuo class
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Constructor startup class
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +39,10 @@ namespace Music.WebAPI
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configure services
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<MusicDbContext>();
@@ -73,10 +84,16 @@ namespace Music.WebAPI
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
+                options.AddSecurityDefinition("Bearer", new Swashbuckle.AspNetCore.Swagger.ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
             });
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
@@ -104,22 +121,27 @@ namespace Music.WebAPI
                     };
                 });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Member",
-                    policy => policy.RequireClaim("MembershipId"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Member",
+            //        policy => policy.RequireClaim("MembershipId"));
+            //});
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.Configure<Settings>(options =>
-            {
-                options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
-                options.Database = Configuration.GetSection("MongoConnection:Database").Value;
-            });
+            //services.Configure<Settings>(options =>
+            //{
+            //    options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
+            //    options.Database = Configuration.GetSection("MongoConnection:Database").Value;
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configure
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

@@ -8,14 +8,15 @@ using System.IO;
 
 namespace Music.WebAPI
 {
+    /// <summary>
+    /// Entry class of application
+    /// </summary>
     public static class Program
     {
-        //public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-        //    .SetBasePath(Directory.GetCurrentDirectory())
-        //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-        //    .AddEnvironmentVariables()
-        //    .Build();
-
+        /// <summary>
+        /// Entry method of application
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
@@ -27,6 +28,11 @@ namespace Music.WebAPI
             CreateWebHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        /// Create web-host builder
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
