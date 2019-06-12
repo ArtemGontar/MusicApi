@@ -8,18 +8,29 @@ using System.Threading.Tasks;
 namespace Music.WebAPI.Controllers
 {
     //[Authorize]
+    /// <summary>
+    /// Artists controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ArtistsController : ControllerBase
     {
         private readonly IArtistService _artistService;
 
+        /// <summary>
+        /// Artists controller constructor
+        /// </summary>
+        /// <param name="artistService"></param>
         public ArtistsController(IArtistService artistService)
         {
             this._artistService = artistService;
         }
 
         // GET api/artists
+        /// <summary>
+        /// Get all artists async
+        /// </summary>
+        /// <returns>Returns IEnumerable artists list</returns>
         [HttpGet]
         public async Task<IEnumerable<Artist>> GetAllAsync()
         {
@@ -27,6 +38,11 @@ namespace Music.WebAPI.Controllers
         }
 
         // GET api/artists/5
+        /// <summary>
+        /// Get artist by id async
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns artist get by Id</returns>
         [HttpGet("{id:length(24)}")]
         public async Task<Artist> GetAsync(string id)
         {
@@ -34,6 +50,11 @@ namespace Music.WebAPI.Controllers
         }
 
         // POST api/artists
+        /// <summary>
+        /// Create artist async
+        /// </summary>
+        /// <param name="artist"></param>
+        /// <returns>Returns artist that was created</returns>
         [HttpPost]
         public async Task<ActionResult<Artist>> CreateAsync([FromBody]Artist artist)
         {
@@ -43,6 +64,12 @@ namespace Music.WebAPI.Controllers
         }
 
         // PUT api/artists
+        /// <summary>
+        /// Update artist async
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="artist"></param>
+        /// <returns>Returns NoContent(204) status code</returns>
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> UpdateAsync(string id, [FromBody] Artist artist)
         {
@@ -56,8 +83,13 @@ namespace Music.WebAPI.Controllers
         
             return NoContent();
         }
-        
+
         // DELETE api/artists
+        /// <summary>
+        /// Delete artist async
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns NoContent(204) status code</returns>
         [HttpDelete]
         public async Task<IActionResult> DeteteAsync(string id)
         {

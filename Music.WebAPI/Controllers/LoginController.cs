@@ -8,19 +8,31 @@ using System.Threading.Tasks;
 
 namespace Music.WebAPI.Controllers
 {
+    /// <summary>
+    /// Auth controller. For login/register
+    /// </summary>
     [Route("api")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
 
-        public LoginController(IUserService userService)
+        /// <summary>
+        /// Auth controller constructor
+        /// </summary>
+        /// <param name="userService"></param>
+        public AuthController(IUserService userService)
         {
             this._userService = userService;
         }
 
 
         // POST api/login
+        /// <summary>
+        /// User send login and password and method responce token if succeed
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Return token if succeed and returns Unauthorized(401) if failure</returns>
         [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody]LoginModel user)
         {
@@ -45,6 +57,11 @@ namespace Music.WebAPI.Controllers
         }
 
         // POST api/register
+        /// <summary>
+        /// Create new user by ifno from user form fill
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Returns new user entity</returns>
         [HttpPost("[action]")]
         public async Task<ActionResult<User>> Register([FromBody]RegisterModel user)
         {
@@ -57,14 +74,17 @@ namespace Music.WebAPI.Controllers
 
             await _userService.CreateAsync(usr);
 
-            //SaveChange
-
-            return CreatedAtAction(nameof(Get), new { id = usr.Id }, usr);
+            return CreatedAtAction(nameof(GetUserByIdAsync), new { id = usr.Id }, usr);
         }
 
         // GET api/songs/5
+        /// <summary>
+        /// Get user by Id async
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns user get by Id</returns>
         [HttpGet("{id:length(24)}")]
-        public async Task<User> Get(string id)
+        public async Task<User> GetUserByIdAsync(string id)
         {
             return await Task.FromResult(await _userService.GetAsync(new ObjectId(id)));
         }

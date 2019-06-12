@@ -22,8 +22,15 @@ using System.Threading.Tasks;
 
 namespace Music.WebAPI
 {
+    /// <summary>
+    /// Startuo class
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Constructor startup class
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +39,10 @@ namespace Music.WebAPI
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configure services
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<MusicDbContext>();
@@ -75,8 +86,7 @@ namespace Music.WebAPI
                 options.IncludeXmlComments(xmlPath);
             });
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
@@ -120,6 +130,11 @@ namespace Music.WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configure
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

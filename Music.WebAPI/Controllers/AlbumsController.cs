@@ -8,18 +8,29 @@ using System.Threading.Tasks;
 namespace Music.WebAPI.Controllers
 {
     //[Authorize]
+    /// <summary>
+    /// Albums controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AlbumsController : ControllerBase
     {
         private readonly IAlbumService _albumService;
 
+        /// <summary>
+        /// Albums controller constructor
+        /// </summary>
+        /// <param name="albumService"></param>
         public AlbumsController(IAlbumService albumService)
         {
             this._albumService = albumService;
         }
 
         // GET api/albums
+        /// <summary>
+        /// Get all albums async
+        /// </summary>
+        /// <returns>Returns IEnumerable albums list</returns>
         [HttpGet]
         public async Task<IEnumerable<Album>> GetAllAsync()
         {
@@ -27,6 +38,11 @@ namespace Music.WebAPI.Controllers
         }
 
         // GET api/albums/5
+        /// <summary>
+        /// Get album by id async
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns albums get by Id</returns>
         [HttpGet("{id:length(24)}")]
         public async Task<Album> GetAsync(string id)
         {
@@ -34,6 +50,11 @@ namespace Music.WebAPI.Controllers
         }
 
         // POST api/albums
+        /// <summary>
+        /// Create album async
+        /// </summary>
+        /// <param name="album"></param>
+        /// <returns>Returns album that was created</returns>
         [HttpPost]
         public async Task<ActionResult<Album>> CreateAsync([FromBody]Album album)
         {
@@ -45,6 +66,12 @@ namespace Music.WebAPI.Controllers
         }
 
         // PUT api/albums
+        /// <summary>
+        /// Update album async
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="album"></param>
+        /// <returns>Returns NoContent(204) status code</returns>
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> UpdateAsync(string id, [FromBody] Album album)
         {
@@ -60,6 +87,11 @@ namespace Music.WebAPI.Controllers
         }
 
         // DELETE api/albums
+        /// <summary>
+        /// Delete album async
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns NoContent(204) status code</returns>
         [HttpDelete]
         public async Task<IActionResult> DeteteAsync(ObjectId id)
         {
