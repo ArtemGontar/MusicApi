@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using Music.BussinessLogic.Services.Interfaces;
 using Music.DataAccess.Entities;
@@ -15,15 +16,18 @@ namespace Music.WebAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly ILogger<AuthController> _logger;
         private readonly IUserService _userService;
 
         /// <summary>
         /// Auth controller constructor
         /// </summary>
         /// <param name="userService"></param>
-        public AuthController(IUserService userService)
+        /// <param name="logger"></param>
+        public AuthController(IUserService userService, ILogger<AuthController> logger)
         {
             this._userService = userService;
+            _logger = logger;
         }
 
 
@@ -36,6 +40,7 @@ namespace Music.WebAPI.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody]LoginModel user)
         {
+            _logger.LogInformation("User try to login");
             var usr = await _userService.GetUser(user.Login, user.Password);
 
             if (usr != null)
@@ -50,9 +55,11 @@ namespace Music.WebAPI.Controllers
                     .AddExpiry(1)
                     .Build();
 
+                _logger.LogInformation("User login successful");
                 return Ok(token.Value);
 
             }
+            _logger.LogInformation("User login failure");
             return Unauthorized();
         }
 

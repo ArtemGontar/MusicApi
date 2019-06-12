@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Music.BussinessLogic.Services.Implementations;
 using Music.BussinessLogic.Services.Interfaces;
@@ -13,6 +14,7 @@ using Music.DataAccess.Entities;
 using Music.DataAccess.Repositories.Implementations;
 using Music.DataAccess.Repositories.Interfaces;
 using Music.WebAPI.Infrastructure;
+using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,8 @@ namespace Music.WebAPI
         /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
+            // Init Serilog configuration
+            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
             Configuration = configuration;
         }
 
@@ -136,7 +140,7 @@ namespace Music.WebAPI
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -160,6 +164,9 @@ namespace Music.WebAPI
             });
 
             app.UseAuthentication();
+            
+            // logging
+            loggerFactory.AddSerilog();
 
             app.UseMvc();
         }
