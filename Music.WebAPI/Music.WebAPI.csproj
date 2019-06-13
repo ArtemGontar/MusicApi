@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Music.BussinessLogic\Music.BussinessLogic.csproj" />
     <ProjectReference Include="..\Music.DataAccess\Music.DataAccess.csproj" />
   </ItemGroup>
 

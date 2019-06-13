@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29001.49
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music.DataAccess", "Music.DataAccess\Music.DataAccess.csproj", "{B94B18C9-15F9-4068-A639-EB0D889D9F3E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music.WebAPI", "Music.WebAPI\Music.WebAPI.csproj", "{E8A02F07-9D45-45D3-A96C-7297AFDEF9BC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music.WebApiControllerTests", "Music.WebApiControllerTests\Music.WebApiControllerTests.csproj", "{1B16C40D-8C4E-45B7-94EF-F294F1016B4B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music.BussinessLogic", "Music.BussinessLogic\Music.BussinessLogic.csproj", "{867E26A9-9ACA-406A-B694-F15FF95168CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{1B16C40D-8C4E-45B7-94EF-F294F1016B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B16C40D-8C4E-45B7-94EF-F294F1016B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B16C40D-8C4E-45B7-94EF-F294F1016B4B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{867E26A9-9ACA-406A-B694-F15FF95168CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{867E26A9-9ACA-406A-B694-F15FF95168CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{867E26A9-9ACA-406A-B694-F15FF95168CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{867E26A9-9ACA-406A-B694-F15FF95168CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
