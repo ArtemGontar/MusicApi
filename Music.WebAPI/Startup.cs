@@ -22,6 +22,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using Serilog.Sinks.Elasticsearch;
 
 namespace Music.WebAPI
 {
@@ -42,7 +43,10 @@ namespace Music.WebAPI
                 .Enrich.WithProcessId()
                 .Enrich.WithMachineName()
                 .Enrich.WithEnvironmentUserName()
-                //.WriteTo.MongoDB("mongodb://localhost/logs")
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:9200") ){
+                 AutoRegisterTemplate = true,
+                 AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv6
+                 })
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 

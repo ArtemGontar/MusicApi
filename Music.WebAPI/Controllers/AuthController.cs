@@ -6,6 +6,7 @@ using Music.DataAccess.Entities;
 using Music.WebAPI.Infrastructure;
 using Music.WebAPI.Models;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace Music.WebAPI.Controllers
 {

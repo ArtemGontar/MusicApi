@@ -14,6 +14,7 @@ namespace Music.DataAccess
 
         public IMongoClient MongoClient { get; set; }
         public IMongoDatabase MongoDatabase { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

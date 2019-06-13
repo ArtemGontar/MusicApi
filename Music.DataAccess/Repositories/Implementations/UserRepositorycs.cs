@@ -13,6 +13,7 @@ namespace Music.DataAccess.Repositories.Implementations
             : base(settings, nameof(User))
         {
         }
+        
         public async Task<User> GetUser(string login, string password)
         {
             return await _collection.Find(x => x.Login == login && x.Password == password)
