@@ -22,12 +22,4 @@ steps:
 - script: dotnet test --configuration $(buildConfiguration)
   displayName: 'dotnet test $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-    arguments: "--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirictory)"
-    zipAfterPublish: true
 
-- task: PublishBuildArtifacts@1
-  displayName: 'public artifacts'
