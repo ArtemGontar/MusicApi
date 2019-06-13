@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Music.WebAPI
 {
@@ -36,7 +37,17 @@ namespace Music.WebAPI
         public Startup(IConfiguration configuration)
         {
             // Init Serilog configuration
-            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.WithThreadId()
+                .Enrich.WithProcessId()
+                .Enrich.WithMachineName()
+                .Enrich.WithEnvironmentUserName()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
+
+            var exampleUser = new User { Name = "Adam", BirthDay = DateTime.Now };
+            Log.Information("Created {@User} on {Created}", exampleUser, DateTime.Now);
+
             Configuration = configuration;
         }
 
