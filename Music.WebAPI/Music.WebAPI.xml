@@ -4,5 +4,264 @@
         <name>Music.WebAPI</name>
     </assembly>
     <members>
+        <member name="T:Music.WebAPI.Controllers.AlbumsController">
+            <summary>
+            Albums controller
+            </summary>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AlbumsController.#ctor(Music.BussinessLogic.Services.Interfaces.IAlbumService)">
+            <summary>
+            Albums controller constructor
+            </summary>
+            <param name="albumService"></param>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AlbumsController.GetAllAsync">
+            <summary>
+            Get all albums async
+            </summary>
+            <returns>Returns IEnumerable albums list</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AlbumsController.GetAsync(System.String)">
+            <summary>
+            Get album by id async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns albums get by Id</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AlbumsController.CreateAsync(Music.DataAccess.Entities.Album)">
+            <summary>
+            Create album async
+            </summary>
+            <param name="album"></param>
+            <returns>Returns album that was created</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AlbumsController.UpdateAsync(System.String,Music.DataAccess.Entities.Album)">
+            <summary>
+            Update album async
+            </summary>
+            <param name="id"></param>
+            <param name="album"></param>
+            <returns>Returns NoContent(204) status code</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AlbumsController.DeteteAsync(MongoDB.Bson.ObjectId)">
+            <summary>
+            Delete album async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns NoContent(204) status code</returns>
+        </member>
+        <member name="T:Music.WebAPI.Controllers.ArtistsController">
+            <summary>
+            Artists controller
+            </summary>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.ArtistsController.#ctor(Music.BussinessLogic.Services.Interfaces.IArtistService)">
+            <summary>
+            Artists controller constructor
+            </summary>
+            <param name="artistService"></param>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.ArtistsController.GetAllAsync">
+            <summary>
+            Get all artists async
+            </summary>
+            <returns>Returns IEnumerable artists list</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.ArtistsController.GetAsync(System.String)">
+            <summary>
+            Get artist by id async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns artist get by Id</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.ArtistsController.CreateAsync(Music.DataAccess.Entities.Artist)">
+            <summary>
+            Create artist async
+            </summary>
+            <param name="artist"></param>
+            <returns>Returns artist that was created</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.ArtistsController.UpdateAsync(System.String,Music.DataAccess.Entities.Artist)">
+            <summary>
+            Update artist async
+            </summary>
+            <param name="id"></param>
+            <param name="artist"></param>
+            <returns>Returns NoContent(204) status code</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.ArtistsController.DeteteAsync(System.String)">
+            <summary>
+            Delete artist async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns NoContent(204) status code</returns>
+        </member>
+        <member name="T:Music.WebAPI.Controllers.AuthController">
+            <summary>
+            Auth controller. For login/register
+            </summary>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AuthController.#ctor(Music.BussinessLogic.Services.Interfaces.IUserService,Microsoft.Extensions.Logging.ILogger{Music.WebAPI.Controllers.AuthController})">
+            <summary>
+            Auth controller constructor
+            </summary>
+            <param name="userService"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AuthController.Login(Music.WebAPI.Models.LoginModel)">
+            <summary>
+            User send login and password and method responce token if succeed
+            </summary>
+            <param name="user"></param>
+            <returns>Return token if succeed and returns Unauthorized(401) if failure</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AuthController.Register(Music.WebAPI.Models.RegisterModel)">
+            <summary>
+            Create new user by ifno from user form fill
+            </summary>
+            <param name="user"></param>
+            <returns>Returns new user entity</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.AuthController.GetUserByIdAsync(System.String)">
+            <summary>
+            Get user by Id async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns user get by Id</returns>
+        </member>
+        <member name="T:Music.WebAPI.Controllers.GroupsController">
+            <summary>
+            Groups controller
+            </summary>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.GroupsController.#ctor(Music.BussinessLogic.Services.Interfaces.IGroupService)">
+            <summary>
+            Groups controller constructor
+            </summary>
+            <param name="groupService"></param>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.GroupsController.GetAllAsync">
+            <summary>
+            Get all groups async
+            </summary>
+            <returns>Returns IEnumerable groups list</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.GroupsController.GetAsync(System.String)">
+            <summary>
+            Get group by id async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns group get by Id</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.GroupsController.CreateAsync(Music.DataAccess.Entities.Group)">
+            <summary>
+            Create group async
+            </summary>
+            <param name="group"></param>
+            <returns>Returns group that was created</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.GroupsController.UpdateAsync(System.String,Music.DataAccess.Entities.Group)">
+            <summary>
+            Update group async
+            </summary>
+            <param name="id"></param>
+            <param name="group"></param>
+            <returns>Returns NoContent(204) status code</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.GroupsController.DeteteAsync(System.String)">
+            <summary>
+            Delete group async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns NoContent(204) status code</returns>
+        </member>
+        <member name="T:Music.WebAPI.Controllers.SongsController">
+            <summary>
+            Songs controller
+            </summary>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.SongsController.#ctor(Music.BussinessLogic.Services.Interfaces.ISongService)">
+            <summary>
+            Songs controller constructor
+            </summary>
+            <param name="songService"></param>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.SongsController.GetAllAsync">
+            <summary>
+            Get all songs async
+            </summary>
+            <returns>Returns IEnumerable songs list</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.SongsController.GetByIdAsync(System.String)">
+            <summary>
+            Get song by id async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns song get by Id</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.SongsController.CreateAsync(Music.DataAccess.Entities.Song)">
+            <summary>
+            Create song async
+            </summary>
+            <param name="song"></param>
+            <returns>Returns song that was created</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.SongsController.UpdateAsync(System.String,Music.DataAccess.Entities.Song)">
+            <summary>
+            Update song async
+            </summary>
+            <param name="id"></param>
+            <param name="song"></param>
+            <returns>Returns NoContent(204) status code</returns>
+        </member>
+        <member name="M:Music.WebAPI.Controllers.SongsController.DeteteAsync(System.String)">
+            <summary>
+            Delete song async
+            </summary>
+            <param name="id"></param>
+            <returns>Returns NoContent(204) status code</returns>
+        </member>
+        <member name="T:Music.WebAPI.Program">
+            <summary>
+            Entry class of application
+            </summary>
+        </member>
+        <member name="M:Music.WebAPI.Program.Main(System.String[])">
+            <summary>
+            Entry method of application
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Music.WebAPI.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            Create web-host builder
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Music.WebAPI.Startup">
+            <summary>
+            Startuo class
+            </summary>
+        </member>
+        <member name="M:Music.WebAPI.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor startup class
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Music.WebAPI.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configure services
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Music.WebAPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Configure
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
     </members>
 </doc>
