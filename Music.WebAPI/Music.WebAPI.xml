@@ -221,6 +221,18 @@
             <param name="id"></param>
             <returns>Returns NoContent(204) status code</returns>
         </member>
+        <member name="T:Music.WebAPI.Infrastructure.ThreadIdEnricher">
+            <summary>
+            Enricher class for serilog.
+            </summary>
+        </member>
+        <member name="M:Music.WebAPI.Infrastructure.ThreadIdEnricher.Enrich(Serilog.Events.LogEvent,Serilog.Core.ILogEventPropertyFactory)">
+            <summary>
+             Add threadId to logs
+            </summary>
+            <param name="logEvent"></param>
+            <param name="propertyFactory"></param>
+        </member>
         <member name="T:Music.WebAPI.Program">
             <summary>
             Entry class of application
