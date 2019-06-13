@@ -22,7 +22,5 @@ steps:
 - script: dotnet test --configuration $(buildConfiguration)
   displayName: 'dotnet test $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
+- script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  displayName: 'dotnet publish $(buildConfiguration)'
