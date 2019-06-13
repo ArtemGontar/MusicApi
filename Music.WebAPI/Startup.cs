@@ -42,6 +42,7 @@ namespace Music.WebAPI
                 .Enrich.WithProcessId()
                 .Enrich.WithMachineName()
                 .Enrich.WithEnvironmentUserName()
+                //.WriteTo.MongoDB("mongodb://localhost/logs")
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
