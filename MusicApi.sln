@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music.WebAPI", "Music.WebAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music.BussinessLogic", "Music.BussinessLogic\Music.BussinessLogic.csproj", "{82F8E98D-23F5-4C5E-848A-2DC0B20832BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music.WebApiControllerTests", "Tests\Music.WebApiControllerTests\Music.WebApiControllerTests.csproj", "{F6BDFDAE-4C8C-4FD2-A9F8-658469610AB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music.Tests.WebApiControllerTests", "Tests\Music.WebApiControllerTests\Music.Tests.WebApiControllerTests.csproj", "{F6BDFDAE-4C8C-4FD2-A9F8-658469610AB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Music.Tests.BussinessLogicServicesTests", "Tests\Music.Tests.BussinessLogicServicesTests\Music.Tests.BussinessLogicServicesTests.csproj", "{75B531C7-2001-438E-AE24-206E01EBF364}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F6BDFDAE-4C8C-4FD2-A9F8-658469610AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6BDFDAE-4C8C-4FD2-A9F8-658469610AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6BDFDAE-4C8C-4FD2-A9F8-658469610AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75B531C7-2001-438E-AE24-206E01EBF364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75B531C7-2001-438E-AE24-206E01EBF364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75B531C7-2001-438E-AE24-206E01EBF364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75B531C7-2001-438E-AE24-206E01EBF364}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
