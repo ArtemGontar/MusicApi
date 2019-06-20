@@ -7,17 +7,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Music.DataAccess.Entities
 {
-    public class Album : IEntity
+    public class Album : Resource, IEntity
     {
         public Album()
         {
         }
         
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
-
         /// <summary>
         /// The name of the album the music video appears on.
         /// </summary>

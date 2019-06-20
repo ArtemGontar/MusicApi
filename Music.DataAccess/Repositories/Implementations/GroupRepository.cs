@@ -8,7 +8,7 @@ namespace Music.DataAccess.Repositories.Implementations
     public class GroupRepository : GenericRepository<Group>, IGroupRepository
     {
         public GroupRepository(IOptions<Settings> settings)
-            : base(settings, nameof(Group))
+            : base(settings, "groups")
         {
 
         }

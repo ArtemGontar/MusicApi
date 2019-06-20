@@ -7,20 +7,21 @@ namespace Music.DataAccess
     public class AuthContext
     {
 
-        private readonly IMongoDatabase _database = null;
+        public IMongoClient MongoClient { get; set; }
+        public IMongoDatabase MongoDatabase { get; set; }
 
         public AuthContext(IOptions<Settings> settings)
         {
-            var client = new MongoClient(settings.Value.ConnectionString);
-            if (client != null)
-                _database = client.GetDatabase(settings.Value.Database);
+            MongoClient = new MongoClient(settings.Value.ConnectionString);
+            if (MongoClient != null)
+                MongoDatabase = MongoClient.GetDatabase(settings.Value.Database);
         }
 
         public IMongoCollection<User> Users
         {
             get
             {
-                return _database.GetCollection<User>("User");
+                return MongoDatabase.GetCollection<User>("users");
             }
         }
     }

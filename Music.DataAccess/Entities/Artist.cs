@@ -7,16 +7,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Music.DataAccess.Entities
 {
-    public class Artist : IEntity
+    public class Artist : Resource, IEntity
     {
         public Artist()
         {
         }
-
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
+        
         /// <summary>
         /// The names of the genres associated with this artist.
         /// </summary>

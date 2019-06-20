@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Music.DataAccess.Entities
 {
-    public class Group : IEntity
+    public class Group : Resource, IEntity
     {
         public Group()
         {
@@ -15,11 +15,7 @@ namespace Music.DataAccess.Entities
             AlbumIds = new List<string>();
             SongIds = new List<string>();
         }
-
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
+        
         [Required]
         [BsonElement("groupName")]
         public string GroupName { get; set; }

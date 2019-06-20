@@ -8,7 +8,7 @@ namespace Music.DataAccess.Repositories.Implementations
     public class AlbumRepository : GenericRepository<Album>, IAlbumRepository
     {
         public AlbumRepository(IOptions<Settings> settings)
-            : base(settings, nameof(Album))
+            : base(settings, "albums")
         {
         }
     }

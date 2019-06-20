@@ -7,12 +7,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Music.DataAccess.Entities
 {
-    public class Song : IEntity
+    public class Song : Resource, IEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
         /// <summary>
         /// The name of the album the song appears on.
         /// </summary>

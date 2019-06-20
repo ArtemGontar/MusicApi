@@ -1,15 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Music.DataAccess.Entities;
 
 namespace Music.DataAccess
 {
     public class MusicDbContext : DbContext
     {
 
-        public MusicDbContext()
+        public MusicDbContext(IOptions<Settings> settings)
         {
-            MongoClient = new MongoClient("mongodb://localhost:27017");
-            MongoDatabase = MongoClient.GetDatabase("SongDB");
+            MongoClient = new MongoClient(settings.Value.ConnectionString);
+            if (MongoClient != null)
+                MongoDatabase = MongoClient.GetDatabase(settings.Value.Database);
         }
 
         public IMongoClient MongoClient { get; set; }
