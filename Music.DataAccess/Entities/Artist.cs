@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using Music.DataAccess.Entities.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Music.DataAccess.Entities
 {
@@ -10,41 +11,57 @@ namespace Music.DataAccess.Entities
     {
         public Artist()
         {
-            SongIds = new List<string>();
-
-            AlbumIds = new List<string>();
-            
         }
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        /// <summary>
+        /// The names of the genres associated with this artist.
+        /// </summary>
+        [BsonElement("genreNames")]
+        [Required]
+        public string GenreNames { get; set; }
 
-        [BsonElement("nickname")]
-        public string Nickname { get; set; }
-        
+        /// <summary>
+        /// The localized name of the artist.
+        /// </summary>
         [BsonElement("name")]
+        [Required]
         public string Name { get; set; }
 
-        [BsonElement("surname")]
-        public string Surname { get; set; }
+        /// <summary>
+        /// The URL for sharing an artist
+        /// </summary>
+        [BsonElement("url")]
+        [Required]
+        public string Url { get; set; }
 
-        public string Fullname { get => Name + Surname; }
+        /// <summary>
+        /// This value will always be artists.
+        /// </summary>
+        [BsonElement("type")]
+        [Required]
+        public string Type { get; set; }
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        public ICollection<string> SongIds { get; set; }
+        #region Relationship
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        public ICollection<string> AlbumIds { get; set; }
+        /// <summary>
+        /// The albums associated with the artist. By default, albums includes identifiers only.
+        /// </summary>
+        [BsonElement("albums")]
+        [Required]
+        public string Albums { get; set; }
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string GroupId { get; set; }
+        /// <summary>
+        /// The genres associated with the artist. By default, genres is not included.
+        /// </summary>
+        [BsonElement("genres")]
+        [Required]
+        public string Genres { get; set; }
 
-        [BsonElement("mainGenre")]
-        public string MainGenre { get; set; }
+        #endregion
 
-        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        public DateTime BirthDay { get; set; }
     }
 }
